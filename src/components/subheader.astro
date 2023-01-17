@@ -1,0 +1,15 @@
+---
+type Props = {
+	label: string
+	id?: string
+}
+
+const { label, id } = Astro.props
+---
+
+<h2
+	class="mb-4 uppercase text-accent-dark font-semibold flex gap-4 items-center"
+>
+	<div class="bg-accent-dark h-0.5 w-4 rounded-full" id={id}></div>
+	{label}
+</h2>
