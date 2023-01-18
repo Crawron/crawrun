@@ -1,6 +1,7 @@
 ---
 import SocialLink from "../components/social-link.astro"
 import "@fontsource/inter/variable.css"
+import BackgroundAnimation from "../components/background-animation"
 ---
 
 <html>
@@ -9,9 +10,12 @@ import "@fontsource/inter/variable.css"
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 	</head>
-	<body class="bg-paper-dark text-ink-dark">
+	<body class="bg-paper-dark text-ink-dark relative">
+		<div class="inset-0 fixed">
+			<BackgroundAnimation client:load />
+		</div>
 		<main
-			class="p-10 flex xl:items-end xl:justify-between gap-16 xl:flex-row flex-col xl:min-h-screen"
+			class="absolute p-10 flex xl:items-end xl:justify-between w-screen gap-16 xl:flex-row flex-col xl:min-h-screen"
 		>
 			<div class="">
 				<h1 class="text-6xl text-accent-dark font-semibold mb-4">hi craw</h1>
