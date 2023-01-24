@@ -74,7 +74,7 @@ const Crow = () => {
 	return (
 		<group
 			dispose={null}
-			scale={0.015}
+			scale={0.012}
 			position={[0.03, 0, 0.16]}
 			rotation={[0, -Math.PI / 3, 0]}
 		>
