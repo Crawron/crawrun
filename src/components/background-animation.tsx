@@ -7,10 +7,12 @@ import {
 	MeshDistortMaterial,
 	MeshWobbleMaterial,
 	shaderMaterial,
+	useGLTF,
 } from "@react-three/drei"
 
 import solidGreenVert from "../glsl/solid-green.vert"
 import solidGreenFrag from "../glsl/solid-green.frag"
+import type { Mesh } from "three"
 
 const WavingMaterial = shaderMaterial(
 	{ uTime: 0 },
@@ -41,14 +43,14 @@ const PlaneMesh = () => {
 	return (
 		<>
 			<mesh ref={mesh} rotation={[-Math.PI / 2, 0, 0]}>
-				<planeGeometry args={[0.5, 0.5, 100, 100]} />
+				<planeGeometry args={[0.7, 0.7, 100, 100]} />
 				<wavingMaterial key={WavingMaterial.key} uTime={time} />
 			</mesh>
-			<mesh position={[0.04, 0, 0.07]}>
+			{/* <mesh position={[0.04, 0, 0.07]}>
 				<icosahedronGeometry args={[0.02, 1]}>
 					<wavingMaterial key={WavingMaterial.key} uTime={time} />
 				</icosahedronGeometry>
-			</mesh>
+			</mesh> */}
 		</>
 	)
 }
@@ -59,11 +61,32 @@ const Camera = () => {
 			<PerspectiveCamera
 				makeDefault
 				fov={15}
-				position={[0, 0.27, 0.64]}
-				rotation={[-0.46, 0, 0.03]}
+				position={[0, 0.2, 0.75]}
+				rotation={[-0.33, 0, 0.03]}
 			/>
 			{/* <OrbitControls /> */}
 		</>
+	)
+}
+
+const Crow = () => {
+	const { nodes, materials } = useGLTF("cutecrow.glb")
+	return (
+		<group
+			dispose={null}
+			scale={0.015}
+			position={[0.03, 0, 0.16]}
+			rotation={[0, -Math.PI / 3, 0]}
+		>
+			<mesh
+				material={materials["crow"]}
+				geometry={(nodes["crow"] as Mesh).geometry}
+			/>
+			<mesh
+				material={materials["crow"]}
+				geometry={(nodes["feathers"] as Mesh).geometry}
+			/>
+		</group>
 	)
 }
 
@@ -71,6 +94,7 @@ const BackgroundAnimation = () => {
 	return (
 		<Canvas className="w-full h-full">
 			<PlaneMesh />
+			<Crow />
 			<Camera />
 			<ambientLight />
 		</Canvas>
